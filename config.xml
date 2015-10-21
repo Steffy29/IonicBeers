@@ -2,10 +2,10 @@
 <widget id="com.ionicframework.ionicbeers968091" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>IonicBeers</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Application on beers list - based on ionic framework and cordova projects.
     </description>
   <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+      Audrey and Stéphanie
     </author>
   <content src="index.html"/>
   <access origin="*"/>
