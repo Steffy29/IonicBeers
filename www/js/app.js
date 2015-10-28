@@ -3,7 +3,11 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
+<<<<<<< HEAD
 angular.module('ionicbeers', ['ionic','pascalprecht.translate'])
+=======
+angular.module('ionicbeers', ['ionic'])
+>>>>>>> f40ff0d... feat(init) : finish step1 for application
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,7 +22,11 @@ angular.module('ionicbeers', ['ionic','pascalprecht.translate'])
   });
 })
 
+<<<<<<< HEAD
 .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
+=======
+.config(function ($stateProvider, $urlRouterProvider) {
+>>>>>>> f40ff0d... feat(init) : finish step1 for application
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
