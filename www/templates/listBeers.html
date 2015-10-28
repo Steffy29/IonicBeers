@@ -1,37 +1,22 @@
 <ion-view view-title="{{'beerGallery' | translate}}">
 	<ion-content class="padding">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-5">
-					<!--Sidebar content-->
-					<div>
-						{{'search' | translate}}: <input ng-model="query">
-					</div>
-				</div>
-				<div class="col-md-5">
-					<div>  
-						{{'sortBy' | translate}}:
-						<select ng-model="orderProp">
-							<option value="name">{{'alphabetical' | translate}}</option>
-							<option value="alcohol">{{'alcoholContent' | translate}}</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class="col-md-10">
-					<!--Body content-->
-					<ul class="beers">
-						<li ng-repeat="beer in beers | filter:query | orderBy:orderProp">
-							<span>{{beer.name}}</span>
-							<p>{{beer.description}}</p>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<ul>
+	      <li>
+	        <span>Affligem Blond</span>
+	        <p>
+	          Affligem Blonde, the classic clear blonde abbey ale, with a gentle roundness and 6.8% alcohol. 
+	          Low on bitterness, it is eminently drinkable.
+	        </p>
+	      </li>
+	      <li>
+	        <span>Affligem Tripel</span>
+	        <p>
+	          The king of the abbey beers. It is amber-gold and pours with a deep head and original aroma, 
+	          delivering a complex, full bodied flavour. Pure enjoyment! Secondary fermentation in the bottle.
+	        </p>
+	      </li>
+	    </ul>	
 
-		<p>{{'beersNumbers' | translate}}: {{beers.length}}</p>
+		<p>Total number of beers: 2</p>
   </ion-content>
 </ion-view>
