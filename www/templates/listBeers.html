@@ -1,4 +1,4 @@
-<ion-view view-title="Ionic Beer Gallery">
+<ion-view view-title="{{'beerGallery' | translate}}">
 	<ion-content class="padding">
 		<ul>
 	      <li>
@@ -17,6 +17,6 @@
 	      </li>
 	    </ul>	
 
-		<p>Total number of beers: 2</p>
+	  <p>{{'beersNumbers' | translate}}: {{beers.length}}</p>
   </ion-content>
 </ion-view>
