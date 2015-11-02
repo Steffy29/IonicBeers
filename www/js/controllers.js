@@ -18,7 +18,7 @@ angular.module('ionicbeers')
   // Load beer detail from json file and show modal
   $scope.openModal = function(beerId) {
     $http.get('beers/' + beerId + '.json').success(function(data) {
-      $scope.beer = data;      
+      $scope.beer = data;
       $scope.mainImg = $scope.beer.img;
 
       $scope.setImage = function(img) {
@@ -37,4 +37,4 @@ angular.module('ionicbeers')
   $scope.$on('$destroy', function() {
     $scope.beerModal.remove();
   });
-}]) 
+}])

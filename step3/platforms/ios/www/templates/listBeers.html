@@ -1,0 +1,12 @@
+<ion-view view-title="{{'beerGallery' | translate}}">
+	<ion-content class="padding">
+		<ul class="list">
+		    <li ng-repeat="beer in beers">
+		      <span>{{beer.name}}</span>
+		      <p>{{beer.description}}</p>
+		    </li>
+	  </ul>	
+
+	  <p>{{'beersNumbers' | translate}}: {{beers.length}}</p>
+  </ion-content>
+</ion-view>
