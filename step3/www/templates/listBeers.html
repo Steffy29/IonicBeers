@@ -1,25 +1,5 @@
 <ion-view view-title="{{'beerGallery' | translate}}">
 	<ion-content class="padding">
-<<<<<<< HEAD
-		<div class="container">
-			<div class="row">
-				<div class="col-md-2">
-					<!--Sidebar content-->
-					Search: <input ng-model="query">
-				</div>
-				<div class="col-md-10">
-					<!--Body content-->
-					<ul class="beers">
-						<li ng-repeat="beer in beers | filter:query">
-							<span>{{beer.name}}</span>
-							<p>{{beer.description}}</p>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-    </ion-content>
-=======
 		<ul class="list">
 		    <li ng-repeat="beer in beers">
 		      <span>{{beer.name}}</span>
@@ -29,5 +9,4 @@
 
 	  <p>{{'beersNumbers' | translate}}: {{beers.length}}</p>
   </ion-content>
->>>>>>> feat(step3) : add search query and filters
 </ion-view>
