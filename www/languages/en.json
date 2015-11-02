@@ -5,9 +5,5 @@
 	"beerGallery" : "Ionic Beer Gallery",
 	"beersNumbers" : "Total number of beers",
 	"content" : "Tchin!",
-	"ionicBeers" : "Ionic Beers",
-	"search" : "Search",
-	"sortBy" : "Order by",
-	"alphabetical" : "Alphabetical",
-	"alcoholContent" : "Alcohol content"
+	"ionicBeers" : "Ionic Beers"
 }
