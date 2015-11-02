@@ -2,14 +2,28 @@
 	<ion-content class="padding">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-5">
 					<!--Sidebar content-->
-					Search: <input ng-model="query">
+					<div>
+						{{'search' | translate}}: <input ng-model="query">
+					</div>
 				</div>
+				<div class="col-md-5">
+					<div>  
+						{{'sortBy' | translate}}:
+						<select ng-model="orderProp">
+							<option value="name">{{'alphabetical' | translate}}</option>
+							<option value="alcohol">{{'alcoholContent' | translate}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
 				<div class="col-md-10">
 					<!--Body content-->
 					<ul class="beers">
-						<li ng-repeat="beer in beers | filter:query">
+						<li ng-repeat="beer in beers | filter:query | orderBy:orderProp">
 							<span>{{beer.name}}</span>
 							<p>{{beer.description}}</p>
 						</li>
@@ -17,5 +31,7 @@
 				</div>
 			</div>
 		</div>
-    </ion-content>
+
+		<p>{{'beersNumbers' | translate}}: {{beers.length}}</p>
+  </ion-content>
 </ion-view>
