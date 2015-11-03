@@ -42,8 +42,7 @@ angular.module('ionicbeers', ['ionic','pascalprecht.translate'])
         url: '/beers',
         views: {
           'menuContent': {
-            templateUrl: 'templates/listBeers.html',
-            controller: 'BeersCtrl'
+            templateUrl: 'templates/listBeers.html'
           }
         }
     });
