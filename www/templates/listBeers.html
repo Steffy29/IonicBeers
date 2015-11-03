@@ -1,4 +1,4 @@
-<ion-view view-title="{{'beerGallery' | translate}}">
+<ion-view view-title="Ionic Beer Gallery">
 	<ion-content class="padding">
 		<div class="container">
 			<div class="row">
@@ -19,19 +19,18 @@
 				</div>
 			</div>
 			<br/>
-			<div class="row">
-				<div class="col-md-10">
-					<!--Body content-->
-					<ul class="beers">
-						<li ng-repeat="beer in beers | filter:query | orderBy:orderProp">
-							<span>{{beer.name}}</span>
-							<p>{{beer.description}}</p>
-						</li>
-					</ul>
-				</div>
+			<div>
+				<!--Body content-->
+			    <ul class="beers">
+			      <li ng-repeat="beer in beers | filter:query | orderBy:orderProp" class="thumbnail">
+			        <a href="#/beers/{{beer.id}}"><img ng-src="{{beer.img}}" class="thumb-img"></a>
+			        <div class="thumb">
+			        <a href="#/beers/{{beer.id}}">{{beer.name}}</a>
+			        <p>{{beer.description}}</p>
+			        </div>
+			      </li>
+			    </ul>
 			</div>
 		</div>
-
-		<p>{{'beersNumbers' | translate}}: {{beers.length}}</p>
   </ion-content>
 </ion-view>
