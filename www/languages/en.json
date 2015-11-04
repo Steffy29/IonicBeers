@@ -9,5 +9,9 @@
 	"search" : "Search",
 	"sortBy" : "Order by",
 	"alphabetical" : "Alphabetical",
-	"alcoholContent" : "Alcohol content"
+	"alcoholContent" : "Alcohol content",
+	"brewery" : "Brewery",
+	"availability" : "Availability",
+	"style" : "Style",
+	"serving" : "Serving instructions"
 }

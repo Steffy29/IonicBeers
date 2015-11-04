@@ -9,5 +9,9 @@
 	"search" : "Recherche",
 	"sortBy" : "Tri par",
 	"alphabetical" : "Alphabétique",
-	"alcoholContent" : "Teneur en alcool"
+	"alcoholContent" : "Teneur en alcool",
+	"brewery" : "Brasserie",
+	"availability" : "Disponibilité",
+	"style" : "Style",
+	"serving" : "Conseils de dégustations"
 }
