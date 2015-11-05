@@ -1,36 +1,40 @@
 angular.module('ionicbeers')
 
-.controller('BeersCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('BeersCtrl', ['$scope', '$http', '$ionicModal', function($scope, $http, $ionicModal) {
   $http.get('beers/beers.json').success(function(data) {
     $scope.beers = data;
   });
 
   $scope.orderProp = 'alcohol';
-}]) 
 
-.controller('BeerDetailCtrl', ['$scope', '$stateParams', '$http', '$ionicModal', function($scope, $stateParams, $http, $ionicModal) {
-
+  // Define modal to display beer detail
   $ionicModal.fromTemplateUrl('templates/beer-detail.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.modal = modal;
+    $scope.beerModal = modal;
   });
 
-  $scope.openModal = function() {
-    $scope.modal.show();
+  // Load beer detail from json file and show modal
+  $scope.openModal = function(beerId) {
+    $http.get('beers/' + beerId + '.json').success(function(data) {
+      $scope.beer = data;      
+      $scope.mainImg = $scope.beer.img;
+
+      $scope.setImage = function(img) {
+        $scope.mainImg = img;
+      }
+    });
+    myBeerId = beerId;
+    $scope.beerModal.show();
   };
 
+  // Hide modal
   $scope.closeModal = function() {
-    $scope.modal.hide();
+    $scope.beerModal.hide();
   };
 
   $scope.$on('$destroy', function() {
-    $scope.modal.remove();
+    $scope.beerModal.remove();
   });
-
-  $http.get('beers/' + $stateParams.beerId + '.json').success(function(data) {
-      $scope.beer = data;
-  });
-
-}])
+}]) 

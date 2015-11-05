@@ -50,7 +50,7 @@ angular.module('ionicbeers', ['ionic','pascalprecht.translate'])
     .state('beer', {
         url: '/beers/:beerId',
         templateUrl: 'templates/beer-detail.html',
-        controller : 'BeerDetailCtrl'
+        controller : 'BeersCtrl'
     });
 
     $urlRouterProvider.otherwise('/event/home');
