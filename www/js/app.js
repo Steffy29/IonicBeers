@@ -42,9 +42,15 @@ angular.module('ionicbeers', ['ionic','pascalprecht.translate'])
         url: '/beers',
         views: {
           'menuContent': {
-            templateUrl: 'templates/listBeers.html'
+            templateUrl: 'templates/listBeers.html',
+            controller : 'BeersCtrl'
           }
         }
+    })
+    .state('beer', {
+        url: '/beers/:beerId',
+        templateUrl: 'templates/beer-detail.html',
+        controller : 'BeersCtrl'
     });
 
     $urlRouterProvider.otherwise('/event/home');

@@ -1,5 +1,19 @@
 body {
-  padding-top: 20px;
+}
+
+.contentTitle {
+	font-size: 1.5em;
+	line-height   : 1.5em;
+    letter-spacing: 0.02em;	
+    margin-top: 5%;
+	color: cadetblue;
+	font-weight: bold;
+}
+
+.content {
+    margin-top: 30%;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .beers {
@@ -25,4 +39,65 @@ body {
   clear: both;
   height: 115px;
   padding-top: 15px;
+}
+
+img.beer {
+  float: left;
+  border: 1px solid black;
+  margin-right: 3em;
+  margin-bottom: 2em;
+  background-color: white;
+  padding: 2em;
+  height: 100%;
+  width: 100%;
+}
+
+.description {
+	margin: 0 10px 10px;
+	text-align: justify;
+}
+
+ul.beer-thumbs {
+  margin: 0;
+  list-style: none;
+}
+
+ul.beer-thumbs li {
+  border: 1px solid black;
+  display: inline-block;
+  margin: 1em;
+  background-color: white;
+}
+
+ul.beer-thumbs img {
+  height: 100px;
+  width: 100px;
+  padding: 1em;
+}
+
+ul.specs {
+  clear: both;
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+ul.specs > li{
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+
+ul.specs > li > span{
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+ul.specs dt {
+  font-weight: bold;
+}
+
+h1 {
+  border-bottom: 1px solid gray;
 }
