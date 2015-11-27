@@ -1,0 +1,53 @@
+<ion-modal-view>
+	<ion-header-bar align-title="left" class="bar-calm">
+		<h1 class ="title">{{beer.name}}</h1>
+		<button class="button icon ion-close-round" ng-click="closeModal()"></button>	
+	</ion-header-bar>
+
+	<ion-content>
+		<img ng-src="{{mainImg}}" class="beer">
+		<p class="description">{{beer.description}}</p>
+
+		<ul class="beer-thumbs">
+		  <li>
+		    <img ng-src="{{beer.img}}" ng-click="setImage(beer.img)">
+		  </li>
+		  <li>
+		    <img ng-src="{{beer.label}}" ng-click="setImage(beer.label)">
+		  </li>
+		</ul>
+
+		<ul class="specs">
+		  <li>
+		    <dl>
+		      <dt>{{'alcoholContent' | translate}}</dt>
+		      <dd>{{beer.alcohol | strongAlcohol }}</dd>
+		    </dl>
+		  </li>
+		  <li>
+		    <dl>
+		      <dt>{{'brewery' | translate}}</dt>
+		      <dd>{{beer.brewery}}</dd>
+		    </dl>
+		  </li>
+		  <li>
+		    <dl>
+		      <dt>{{'availability' | translate}}</dt>
+		      <dd>{{beer.availability}}</dd>
+		    </dl>
+		  </li>
+		  <li>
+		    <dl>
+		      <dt>{{'style' | translate}}</dt>
+		      <dd>{{beer.style}}</dd>
+		    </dl>
+		  </li>
+		  <li>
+		    <dl>
+		      <dt>{{'serving' | translate}}</dt>
+		      <dd>{{beer.serving}}</dd>
+		    </dl>
+		  </li>
+		</ul>
+	</ion-content>
+</ion-modal-view>

@@ -1,0 +1,18 @@
+{
+	"menu" : "Menu",
+	"home" : "Home",
+	"beersList" : "List of beers",
+	"beerGallery" : "Ionic Beer Gallery",
+	"beersNumbers" : "Total number of beers",
+	"content" : "Welcome to the demonstration application of the implementation of Ionic Framework.",
+	"contentNext" : "Based on angular-beers application supported by @LostInBrittany.",
+	"ionicBeers" : "Ionic Beers",
+	"search" : "Search",
+	"sortBy" : "Order by",
+	"alphabetical" : "Alphabetical",
+	"alcoholContent" : "Alcohol content",
+	"brewery" : "Brewery",
+	"availability" : "Availability",
+	"style" : "Style",
+	"serving" : "Serving instructions"
+}
