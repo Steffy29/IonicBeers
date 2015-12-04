@@ -198,6 +198,8 @@ Open `app.js` to define routes
 
 Save changes and run the app. It should look something like the below.
 
+![Get beers list](../img/2015-12-04-getBeersList.png)
+
 
 ## Fetching data from Beer catalog
 
@@ -230,7 +232,8 @@ angular.module('ionicbeers')
 
 This controller defines a list of beers returned to the Angular scope.
 
-Open `index.html` file and add line
+Open `index.html` file
+
 
 ```
 <script src="js/controllers.js"></script>
@@ -310,125 +313,172 @@ Change all labels in `*.html` files to translate labels
 
 ## Order and search in list
 
+Sometimes the list need to be ordered. AngularJS do this with easy directives.
 
-
-## Binding data to the UI
-
-Once the data is in the `beersList` array, bind it to the UI. For displaying the data, create a `ListView` in `main-page.xml`, underneath the existing `Button` element.
-
+Add lines in `controllers.js` file  after beers list initialization
 
 ```
-<ListView>
-    <ListView.itemTemplate>
-      <StackLayout orientation="vertical">
-        <Label id="name" class="beerName" />
-        <Label id="description" textWrap="true" />
-      </StackLayout>
-    </ListView.itemTemplate>
-</ListView>
+$scope.orderProp = 'alcohol';
 ```
 
-
-Bind the `beersList` array to the list view:
-
+Open `listBeers.html` and add lines to filter beers
 
 ```
-<ListView items="{{ beerList }}">
-<ListView.itemTemplate>
-  <StackLayout orientation="vertical">
-    <Label id="name" text="{{ name }}" class="beerName" />
-    <Label id="description" text="{{ description }}" textWrap="true" />
-  </StackLayout>
-</ListView.itemTemplate>
-</ListView>
+<div>
+  {{'search' | translate}}: <input ng-model="query">
+</div>
 ```
 
-To make our list more user friendly, we also add some CSS to `app.css`:
-
-
-```
-.beerName {
-  font-size: 20;
-}
-```
-
-For the `beersList` array to be available across the view, set the `beersList` array in the observable module. Do this by importing an observable module and using it to create an observable object.
-
+Add lines to sort beers
 
 ```
-var observableModule = require("data/observable");
-var pageData = new observableModule.Observable();
+<div>
+  {{'sortBy' | translate}}:
+  <select ng-model="orderProp">
+    <option value="name">{{'alphabetical' | translate}}</option>
+    <option value="alcohol">{{'alcoholContent' | translate}}</option>
+  </select>
+</div>
 ```
 
-In the `pageLoaded` function, set the images array to the observable module and add the observable module to the page context.
-
+After, add filter and sorter to the `ng-repeat` directive
 
 ```
-function pageLoaded(args) {
-    var page = args.object;
-    pageData.set("images", images);
-    page.bindingContext = pageData;
-}
+<li ng-repeat="beer in beers | filter:query | orderBy:orderProp">
 ```
+
+## Loading beers from JSON files
+
+Add `$http` service in the controller definition and replace initialization of beers list  with loading JSON files
+
+```
+$http.get('beers/beers.json').success(function(data) {
+  $scope.beers = data;
+});
+```
+
 
 ## Getting the beers pics
 
-We can also extract the image URL from the received JSON :
+We can also extract the image URL from the received JSON and then we add the image to the `listBeers.html`:
 
 
 ```
-var beer = {
-  name: r[i].name,
-  description: r[i].description,
-  alcohol: r[i].alcohol,
-  img: "http://beertutorials.github.io/website/"+r[i].img
-}
+<a href="#/beers/{{beer.id}}"><img ng-src="{{beer.img}}" class="thumb-img"></a>
+<div class="thumb">
+<a href="#/beers/{{beer.id}}">{{beer.name}}</a>
+<p>{{beer.description}}</p>
+</div>
 ```
 
-And then we add the image to the `ListView.itemTemplate`:
+![After adding pics](../img/2015-12-04-beers-pics.png)
 
 
-```
-<ListView.itemTemplate>
-  <StackLayout orientation="horizontal">
-    <Image width="100px" height="100px" src="{{img}}" />
-    <StackLayout orientation="vertical">
-      <Label id="name" text="{{ name }}" class="beerName" />
-      <Label id="description" text="{{ description }}" textWrap="true" />
-    </StackLayout>
-  </StackLayout>
-</ListView.itemTemplate>
-```
+## Let's display the beer description
 
-![After adding pics](../img/2015-12-01-beers-with-pics.png)
-
-
-## Let's forget the Button
-
-Let's call for the beer list without button. We are going to use application's lifecycle method `onLaunch`
-on `app.js`:
-
+On the beers list `listBeers.html`, add action on beer name and on picture
 
 ```
-application.on(application.launchEvent, function (args) {
-   var mainPage = require("./main-page");
-   mainPage.beers();
-})
+<img ng-src="{{beer.img}}" class="thumb-img" ng-click="openModal(beer.id)">
+<a href="" ng-click="openModal(beer.id)">{{beer.name}}</a>
 ```
 
-Now you can delete the `Buttom` from `main-page.xml`.
-
-
-## And how about the ActionBar title?
-
-To have access to the `ActionBar` with the application title, you only need to explicitly declare it in `main-page.xml`:
+Now create new file `beer-detail.html` to display beer description
 
 ```
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-  <Page.actionBar>
-    <ActionBar title="NativeScript Beers" android.icon="res://ic_test"/>
-  </Page.actionBar>
+<ion-modal-view>
+	<ion-header-bar align-title="left" class="bar-calm">
+		<h1 class ="title">{{beer.name}}</h1>
+		<button class="button icon ion-close" ng-click="closeModal()"></button>
+	</ion-header-bar>
+
+	<ion-content>
+		<img ng-src="{{mainImg}}" class="beer">
+		<p class="description">{{beer.description}}</p>
+
+		<ul class="beer-thumbs">
+		  <li>
+		    <img ng-src="{{beer.img}}" ng-click="setImage(beer.img)">
+		  </li>
+		  <li>
+		    <img ng-src="{{beer.label}}" ng-click="setImage(beer.label)">
+		  </li>
+		</ul>
+
+		<ul class="specs">
+		  <li>
+		    <dl>
+		      <dt>{{'alcoholContent' | translate}}</dt>
+		      <dd>{{beer.alcohol | strongAlcohol }}</dd>
+		    </dl>
+		  </li>
+		  <li>
+		    <dl>
+		      <dt>{{'brewery' | translate}}</dt>
+		      <dd>{{beer.brewery}}</dd>
+		    </dl>
+		  </li>
+		  <li>
+		    <dl>
+		      <dt>{{'availability' | translate}}</dt>
+		      <dd>{{beer.availability}}</dd>
+		    </dl>
+		  </li>
+		  <li>
+		    <dl>
+		      <dt>{{'style' | translate}}</dt>
+		      <dd>{{beer.style}}</dd>
+		    </dl>
+		  </li>
+		  <li>
+		    <dl>
+		      <dt>{{'serving' | translate}}</dt>
+		      <dd>{{beer.serving}}</dd>
+		    </dl>
+		  </li>
+		</ul>
+	</ion-content>
+</ion-modal-view>
 ```
 
+Define modal to display beer detail in `controllers.js`
 
-![After adding pics](../img/2015-12-01-beers-with-pics-no-button.png)
+```
+$ionicModal.fromTemplateUrl('templates/beer-detail.html', {
+  scope: $scope,
+  animation: 'slide-in-up'
+}).then(function(modal) {
+  $scope.beerModal = modal;
+});
+```
+
+Load beer definition from JSON file in `controllers.js`
+
+```
+$scope.openModal = function(beerId) {
+  $http.get('beers/' + beerId + '.json').success(function(data) {
+    $scope.beer = data;      
+    $scope.mainImg = $scope.beer.img;
+
+    $scope.setImage = function(img) {
+      $scope.mainImg = img;
+    }
+  });
+  myBeerId = beerId;
+  $scope.beerModal.show();
+};
+```
+
+Hide modal when click on close button in `controllers.js`
+
+```
+$scope.closeModal = function() {
+  $scope.beerModal.hide();
+};
+
+$scope.$on('$destroy', function() {
+  $scope.beerModal.remove();
+});
+```
+
+![After display beer detail](2015-12-04-beer-detail.png)
