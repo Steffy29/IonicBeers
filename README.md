@@ -29,6 +29,12 @@ Run the application on the Android emulator.
 ionic emulate android
 ```
 
+Run the application on desktop browser
+```
+ionic serve --lab
+```
+
+
 > Note: To run the application in the Android emulator, you need to have the Android SDK
 > installed and configured on your computer.
 > The easiest way to do it is to install [Android Studio](http://developer.android.com/tools/studio/index.html)
@@ -85,18 +91,37 @@ Inside the `www` folder is a file called `index.html` which has the default appl
 
 ## Designing the app
 
-Let's start by removing unused lines in application. Open `index.html` and look at the default code. Remove lines between the `body` tags. The `body` tag has an attribute called `ng-app` which references the application.
+Let's start by removing unused lines in application. Open `index.html` and look at the default code, note that the `cordova.js` file must the last script. Remove lines between the `body` tags. The `body` tag has an attribute called `ng-app` which references the application.
 
 This project will use a *[navigation view](http://ionicframework.com/docs/api/directive/ionNavView/)* to design our app.
 
-Inside the Page tag add the stack layout.
+Inside the body tag add the navigation view.
 
 
 ```
-<StackLayout orientation="vertical">
-
-</StackLayout>
+<ion-nav-view></ion-nav-view>
 ```
+
+Create a new directory in the `www` directory named `templates`. In this new directory, create a new file named `menu.html`. In this file, you would use a *ion-menu* directive. Open `menu.html` and add lines
+
+``
+<ion-side-menus>
+  <ion-side-menu-content>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+  </ion-side-menu>
+</ion-side-menus>
+``
+
+
+Save changes. If you run this code, you would see nothing (just a white screen).
+
+
+## Initializing the application
+
+Open `app.js` to define configuration
+
 
 
 Define the stack layout with a vertical orientation. Add a button inside the stack layout.
