@@ -104,7 +104,7 @@ Inside the body tag add the navigation view.
 
 Create a new directory in the `www` directory named `templates`. In this new directory, create a new file named `menu.html`. In this file, you would use a *ion-menu* directive. Open `menu.html` and add lines
 
-``
+```
 <ion-side-menus>
   <ion-side-menu-content>
   </ion-side-menu-content>
@@ -112,7 +112,7 @@ Create a new directory in the `www` directory named `templates`. In this new dir
   <ion-side-menu side="left">
   </ion-side-menu>
 </ion-side-menus>
-``
+```
 
 
 Save changes. If you run this code, you would see nothing (just a white screen).
