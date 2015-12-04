@@ -91,7 +91,7 @@ Inside the `www` folder is a file called `index.html` which has the default appl
 
 ## Designing the app
 
-Let's start by removing unused lines in application. Open `index.html` and look at the default code, note that the `cordova.js` file must the last script. Remove lines between the `body` tags. The `body` tag has an attribute called `ng-app` which references the application.
+Let's start by removing unused lines in application. Open `index.html` and look at the default code. Remove lines between the `body` tags. The `body` tag has an attribute called `ng-app` which references the application.
 
 This project will use a *[navigation view](http://ionicframework.com/docs/api/directive/ionNavView/)* to design our app.
 
@@ -108,9 +108,19 @@ Create a new directory in the `www` directory named `templates`. In this new dir
 ```
 <ion-side-menus>
   <ion-side-menu-content>
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button></ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
+    <ion-header-bar class="bar-dark">
+      <h1 class="title">Menu</h1>
+    </ion-header-bar>
   </ion-side-menu>
 </ion-side-menus>
 ```
@@ -126,107 +136,180 @@ Create a new file in `templates`directory named `home.html`. Open `home.html` an
 </ion-view>
 ```
 
-
-Save changes. If you run this code, you would see nothing (just a white screen).
-
-
-## Initializing the application
-
-Open `app.js` to define configuration
-
-
-
-Define the stack layout with a vertical orientation. Add a button inside the stack layout.
-
+Create new file in `templates` directory called `listBeers.html`
 
 ```
-<Button text="Get beer list" height="50px" style="width:300px;border:none;font-size:20px;" />
+<ion-view view-title="Ionic Beer Gallery">
+	<ion-content class="padding">
+		<ul>
+	      <li>
+	        <span>Affligem Blond</span>
+	        <p>
+	          Affligem Blonde, the classic clear blonde abbey ale, with a gentle roundness and 6.8% alcohol.
+	          Low on bitterness, it is eminently drinkable.
+	        </p>
+	      </li>
+	      <li>
+	        <span>Affligem Tripel</span>
+	        <p>
+	          The king of the abbey beers. It is amber-gold and pours with a deep head and original aroma,
+	          delivering a complex, full bodied flavour. Pure enjoyment! Secondary fermentation in the bottle.
+	        </p>
+	      </li>
+	    </ul>
+
+		<p>Total number of beers: 2</p>
+  </ion-content>
+</ion-view>
 ```
 
+
+Open `app.js` to define routes
+
+```
+.config(function ($stateProvider, $urlRouterProvider) {
+
+    $stateProvider
+    .state('eventmenu', {
+      url: '/event',
+      abstract: 'true',
+      templateUrl: 'templates/menu.html'
+    })
+    .state('eventmenu.home', {
+        url: '/home',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/home.html'
+          }
+        }
+    })
+    .state('eventmenu.beers', {
+        url: '/beers',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/listBeers.html'
+          }
+        }
+    });
+
+    $urlRouterProvider.otherwise('/event/home');
+})
+```
 
 Save changes and run the app. It should look something like the below.
-
-![After adding button](../img/2015-12-01-get_beer_list_btn.png)
 
 
 ## Fetching data from Beer catalog
 
-Add an attribute called `tap` to the *Get beer list* button.
 
-
-```
-tap="beers"
-```
-
-
-Now, when the user taps the search button the `beers` function is called.
-Let’s define the `beers` function inside` main-page.js`.
-
+Create new file `js` directory called `controllers.js`
 
 ```
-exports.beers = function() {
-  // Code would be here !
-};
+angular.module('ionicbeers')
+
+.controller('BeersCtrl', ['$scope', function($scope) {
+    $scope.beers = [
+      {
+        "alcohol": 8.5,
+        "name": "Affligem Tripel",
+        "description": "The king of the abbey beers. It is amber-gold and pours with a deep head and original aroma, delivering a complex, full bodied flavour. Pure enjoyment! Secondary fermentation in the bottle."
+      },
+      {
+        "alcohol": 9.2,
+        "name": "Rochefort 8",
+        "description": "A dry but rich flavoured beer with complex fruity and spicy flavours."
+      },
+      {
+        "alcohol": 7,
+        "name": "Chimay Rouge",
+        "description": "This Trappist beer possesses a beautiful coppery colour that makes it particularly attractive. Topped with a creamy head, it gives off a slight fruity apricot smell from the fermentation. The aroma felt in the mouth is a balance confirming the fruit nuances revealed to the sense of smell. This traditional Belgian beer is best savoured at cellar temperature "
+      }
+    ];
+  }])
+  ```
+
+This controller defines a list of beers returned to the Angular scope.
+
+Open `index.html` file and add line
+
+```
+<script src="js/controllers.js"></script>
 ```
 
-
-Calling the API will require the `http` module, so import the module into `main-page.js`.
-
+Open `listBeers.html` and replace lines between `ion-content` tag with those lines
 
 ```
-var http = require("http");
+<ul class="list">
+    <li ng-repeat="beer in beers">
+      <span>{{beer.name}}</span>
+      <p>{{beer.description}}</p>
+    </li>
+</ul>
+
+<p>Total number of beers: {{beers.length}}</p>
 ```
 
+## Translate labels
 
-Inside the `beers` function, and using the `http` module, now make the API call.
-For the needs of this tutorial, the beer catalog is a JSON file on
-`{{ site.baseurl }}/beers/beers.json`.
-
+Now the application needs to be translated for users all around the world. For this, add `angular-translate` library with this command and update bower configuration
 
 ```
-http.getJSON("{{ site.baseurl }}/beers/beers.json").then(function(r) {
+bower install angular-translate-loader-static-files --save
+```
 
-    console.log(JSON.stringify(r));
+Open `app.js` file and add lines after `$urlRouterProvider`
 
-}, function(e) {
-
-    console.log(e);
-
+```
+// Translate labels / title / menus
+$translateProvider.useSanitizeValueStrategy('escape');
+$translateProvider.useStaticFilesLoader({
+    prefix: 'languages/',
+    suffix:'.json'
 });
+$translateProvider
+.registerAvailableLanguageKeys(['en','fr'], {
+    'en_US': 'en',
+    'en_UK': 'en',
+    'fr_FR': 'fr',
+    'fr_BE': 'fr'
+})
+.determinePreferredLanguage();
+
+$translateProvider.use();
 ```
 
-
-The code above makes the API call.
-
-When running an app in the emulator you will need to run ‘adb logcat’ to check log messages.
-
-Save changes and run the app on the emulator. Click the *get beer list* button and the
-returned result from the server should be visible in terminal.
-
-Next use the response returned to push the beers information to an array.
-
-An `observable array` is required to create and detect changes to a collection of things.
-Bind this same observable array to the view so that the view updates whenever a change occurs.
-
-To create the `observable array`, add these variable declarations to `main-page.js` :
-
+Open `index.html` and add lines to link script
 
 ```
-var observableArray = require("data/observable-array");
-var beerList = new observableArray.ObservableArray([]);
+<script src="lib/angular-translate/angular-translate.js"></script>
+<script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 ```
 
-
-Next, we iterate through the returned data:
-
+Create new files that contain translated labels in a new directory `languages`, for example `en.json`
 
 ```
-var beer = {
-  name: r[i].name,
-  description: r[i].description,
-  alcohol: r[i].alcohol
+{
+	"menu" : "Menu",
+	"home" : "Home",
+	"beersList" : "List of beers",
+	"beerGallery" : "Ionic Beer Gallery",
+	"beersNumbers" : "Total number of beers",
+	"content" : "Welcome!",
+	"ionicBeers" : "Ionic Beers"
 }
 ```
+
+Update `home.html` file to translate labels
+
+```
+{{'content' | translate}}
+```
+
+Change all labels in `*.html` files to translate labels
+
+
+## Order and search in list
+
 
 
 ## Binding data to the UI
