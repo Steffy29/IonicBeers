@@ -104,6 +104,7 @@ Inside the body tag add the navigation view.
 
 Create a new directory in the `www` directory named `templates`. In this new directory, create a new file named `menu.html`. In this file, you would use a *ion-menu* directive. Open `menu.html` and add lines
 
+
 ```
 <ion-side-menus>
   <ion-side-menu-content>
@@ -112,6 +113,17 @@ Create a new directory in the `www` directory named `templates`. In this new dir
   <ion-side-menu side="left">
   </ion-side-menu>
 </ion-side-menus>
+```
+
+
+Create a new file in `templates`directory named `home.html`. Open `home.html` and add lines
+
+```
+<ion-view view-title="Ionic Beers">
+	<ion-content class="padding">
+		Welcome!
+	</ion-content>
+</ion-view>
 ```
 
 
