@@ -39,43 +39,55 @@ ionic emulate android
 ![Initial app](../img/2015-12-04-initial-app.png)
 
 
-The `tns livesync` command instantly transfers XML, CSS, and JavaScript files to a running NativeScript app. If you set the command's `--watch` flag (`tns livesync ios --emulator --watch` or `tns livesync android --emulator --watch`), the NativeScript CLI will watch your app for changes, and apply those changes automatically after you save files. Be warned, however, that the `livesync` command currently does not show `console.log()` output or stack traces. So during debugging you may want to switch back to `tns run` or use `adb logcat` in parallel to get logs directly from the android emulator.
-
 ## Project Structure
 
 
     .
-    └── nativescript-beers
-        ├── app
-        │   ├── App_Resources
-        │   │   ├── Android
-        │   │   └── iOS
-        │   ├──  main-page.js
-        │   ├──  main-page.xml  
-        │   ├──  main-view-model.js  
-        │   ├──  package.json  
-        │   ├──  references.d.ts
-        │   ├── app.css
-        │   ├── app.js
-        │   └── ...
-        ├── node_modules
-        │   └── tns-core-modules
+    └── ionic-beers
+        ├── www
+        │   ├── css
+        │   │   └── style.css
+        │   ├── img
+        │   │   └── ionic.png
+        │   ├── js  
+        │   │   └── app.js
+        │   ├── lib
+        │   │   └── ionic
+        │   │       └── ...
+        │   └── index.html
+        ├── hooks
+        │   ├── after_prepare
+        │   │   └── ...
+        │   └── README.md
+        ├── resources
+        │   ├── android
+        │   │   └── ...
+        │   ├── ios
+        │   │   └── ...
+        │   ├── icon.png
+        │   └── splash.png
+        ├── scss
+        │   └── ionic.app.scss
         ├── package.json
+        ├── bower.json
+        ├── config.xml
+        ├── gulpfile.js
+        ├── ionic.project
         └── platforms
             ├── android
             └── ios    
 
 
-Inside  the project folder there are 3 sub-folders: `app`, `lib` and `platforms`. The application source code resides in the `app` folder. Application code is written using JavaScript and the user interface designed using XML.
+Inside  the project folder there are 4 sub-folders: `hooks`, `scss`, `platforms` and `www`. The application source code resides in the `www` folder. Application code is written using AngularJS and Javascript.
 
-Inside the `app` folder is a file called `main-page.xml` which has the default user interface code. In `main-view-model.js` is the default model code and` main-page.js` defines the application logic. Finally `app.js` contains the code to start the application with the defined modules.
+Inside the `www` folder is a file called `index.html` which has the default application code. Finally `app.js` contains the code to start the application with the defined modules.
 
 
 ## Designing the app
 
-Let’s start by designing the application using XML. Open `main-page.xml` and look at the default code. Remove everything except the `Page` tag. The `Page` tag has an attribute called `loaded` which executes the `pageLoaded` function once the app loads. The `pageLoaded` function is inside the `main-page.js` file.
+Let's start by removing unused lines in application. Open `index.html` and look at the default code. Remove lines between the `body` tags. The `body` tag has an attribute called `ng-app` which references the application.
 
-This project will use a *stack layout* to design our app. There are [a number of layouts offered by native script](http://docs.nativescript.org/layouts).
+This project will use a *[navigation view](http://ionicframework.com/docs/api/directive/ionNavView/)* to design our app.
 
 Inside the Page tag add the stack layout.
 
