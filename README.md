@@ -234,6 +234,20 @@ angular.module('ionicbeers')
 
 This controller defines a list of beers returned to the Angular scope.
 
+Open `app.js` file
+
+```
+.state('eventmenu.beers', {
+    url: '/beers',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/listBeers.html',
+        controller: 'BeerCtrl'
+      }
+    }
+});
+```
+
 Open `index.html` file
 
 
@@ -262,7 +276,13 @@ Now the application needs to be translated for users all around the world. For t
 bower install angular-translate-loader-static-files --save
 ```
 
-Open `app.js` file and add lines after `$urlRouterProvider`
+Open `app.js` file  and update
+
+```
+angular.module('ionicbeers', ['ionic','pascalprecht.translate'])
+```
+
+and add lines after `$urlRouterProvider`
 
 ```
 // Translate labels / title / menus
