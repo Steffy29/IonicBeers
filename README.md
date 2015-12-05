@@ -438,7 +438,7 @@ Now create new file `beer-detail.html` to display beer description
 		  <li>
 		    <dl>
 		      <dt>{{'alcoholContent' | translate}}</dt>
-		      <dd>{{beer.alcohol | strongAlcohol }}</dd>
+		      <dd>{{beer.alcohol}}</dd>
 		    </dl>
 		  </li>
 		  <li>
