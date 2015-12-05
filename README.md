@@ -123,6 +123,13 @@ Create a new directory in the `www` directory named `templates`. In this new dir
     <ion-header-bar class="bar-dark">
       <h1 class="title">Menu</h1>
     </ion-header-bar>
+
+		<ion-content>
+			<ul class="list">
+				<a href="#/event/home" class="item" menu-close>Home</a>
+				<a href="#/event/beers" class="item" menu-close>Beers list</a>
+			</ul>
+		</ion-content>
   </ion-side-menu>
 </ion-side-menus>
 ```
