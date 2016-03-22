@@ -40,7 +40,7 @@ ionic serve --lab
 > The easiest way to do it is to install [Android Studio](http://developer.android.com/tools/studio/index.html)
 > for your platform.
 >
-> If you find issues while initializing the app, read carefully [these instructions](http://ionicframework.com/docs/getting-help/)
+> If you have issues while initializing the app, read carefully [these instructions](http://ionicframework.com/docs/getting-help/)
 
 ![Initial app](../img/2015-12-04-initial-app.png)
 
@@ -145,7 +145,7 @@ Create a new file in `templates`directory named `home.html`. Open `home.html` an
 </ion-view>
 ```
 
-Create new file in `templates` directory called `listBeers.html`
+Create a new file in `templates` directory called `listBeers.html`
 
 ```
 <ion-view view-title="Ionic Beer Gallery">
@@ -205,7 +205,7 @@ Open `app.js` to define routes
 })
 ```
 
-Save changes and run the app. It should look something like the below.
+Save changes and run the app. It should look this way.
 
 ![Get beers list](../img/2015-12-04-getBeersList.png)
 
@@ -213,7 +213,7 @@ Save changes and run the app. It should look something like the below.
 ## Fetching data from Beer catalog
 
 
-Create new file `js` directory called `controllers.js`
+Create a new file `js` directory called `controllers.js`
 
 ```
 angular.module('ionicbeers')
@@ -241,7 +241,15 @@ angular.module('ionicbeers')
 
 This controller defines a list of beers returned to the Angular scope.
 
-Open `app.js` file
+Open `index.html` and and declare the new controller
+
+
+```
+<script src="js/controllers.js"></script>
+```
+
+
+Open `app.js` file and add the BeersCtrl to the beer menu item
 
 ```
 .state('eventmenu.beers', {
@@ -249,17 +257,10 @@ Open `app.js` file
     views: {
       'menuContent': {
         templateUrl: 'templates/listBeers.html',
-        controller: 'BeerCtrl'
+        controller: 'BeersCtrl'
       }
     }
 });
-```
-
-Open `index.html` file
-
-
-```
-<script src="js/controllers.js"></script>
 ```
 
 Open `listBeers.html` and replace lines between `ion-content` tag with those lines
